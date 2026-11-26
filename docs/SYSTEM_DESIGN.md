@@ -38,7 +38,7 @@
 | Hosting | **Vercel** (landing + app, two projects) | Familiar, preview deploys per branch, static SPA needs only an SPA rewrite in `vercel.json`. Hobby plan is non-commercial: move to Pro ($20/mo) before taking Founding Member payments. |
 | Analytics | PostHog (cloud, free tier) | Activation/retention events in §10. |
 | Errors | Sentry (free tier) | Client + Edge Functions. |
-| Tests | Vitest | Scheduler unit tests + AI parsing eval set (§11). |
+| Tests | `node --test` (scheduler, zero deps); Vitest for the app | Scheduler unit tests + AI parsing eval set (§11). Node 25 runs the `.ts` files directly. |
 
 **Domains:** `getkutitap.com` (landing), `app.getkutitap.com` (PWA). Separate origins keep the PWA's scope and service worker clean.
 
@@ -232,7 +232,7 @@ plan(input: {
 ```
 
 - Builds free intervals per day: wake→sleep minus fixed blocks minus exceptions.
-- Places in PRD §11 order: fixed recurring tasks → deadline tasks by `est/minutes_until_due` → Big Rocks (goal + someday, top `someday_score`, one per weekday minimum, deep-work slot) → flexible habits → the rest.
+- Places in this order: fixed-time habits → deadlines due today → Big Rock (top `someday_score`, deep-work slot) → later deadlines by `est/minutes_until_due` → flexible habits → remaining someday tasks. Deviation from PRD §11: the Big Rock goes before *later* deadlines, otherwise a busy week could crowd out the guaranteed someday slot (F6.3). Deadlines due today still go first (F11.2 rule 1).
 - Reserves 10-15% buffer per day and a break after each focus block; never exceeds free time.
 - Chunks anything longer than the slot into follow-up tasks (AI chunking names them; the engine only needs sizes).
 - Catch-up applies F11.2 in order and reports a `changes` list so the UI can decide auto vs ask.
@@ -250,10 +250,11 @@ Same inputs always produce the same schedule: AI only turned the user's text int
 | Order | What | How it picks a slot |
 |---|---|---|
 | 1 | Fixed-time habits ("Gym 18:00") | Exactly at their time |
-| 2 | Deadline tasks | By `urgency = est_minutes / minutes_until_due` |
-| 3 | Big Rocks (goal + someday) | Top `someday_score`, in the deep-work slot, ≥1 per weekday |
-| 4 | Flexible habits ("4x a week, evenings") | First fitting gap in their preferred period |
-| 5 | Everything else | Remaining gaps until the budget is spent |
+| 2 | Deadlines due today | Never moved; by urgency |
+| 3 | Big Rock (goal + someday) | Top `someday_score`, in the deep-work slot, ≥1 per weekday |
+| 4 | Later deadlines | By `urgency = est_minutes / minutes_until_due` |
+| 5 | Flexible habits ("4x a week, evenings") | First fitting gap in their preferred period |
+| 6 | Other someday tasks | One chunk each until the budget is spent |
 
 Placement is "earliest gap that fits within the preferred period"; too big for one gap → split; no room → rolls to tomorrow.
 
@@ -268,14 +269,15 @@ Placement is "earliest gap that fits within the preferred period"; too big for o
 19:10  Study for exam (due Fri)      90   ← deadline
 20:40  break                         5
 20:45  Reply to client emails        45
-21:30  buffer (unscheduled)          ~90
+21:30  break                         5
+21:35  buffer (unscheduled)          ~85
 ```
 
 **Week vs day vs catch-up:** the weekly draft runs the same steps over 7 days (a task is placed once, so Big Rocks spread out). The 4 AM daily run takes today's slice plus carry-overs and re-runs steps 1-4 on today. Catch-up re-runs on the rest of today with F11.2 rules (fixed and due-today blocks locked, buffer used first, shrink before move, never cram) and returns a `changes` list the UI uses to decide auto-apply vs ask.
 
 `size_weight` and `goal_link_bonus` are not set by the PRD: start with simple defaults and tune from concierge-test data.
 
-**Acceptance tests** (Vitest) encode the PRD acceptance criteria directly: every active someday task gets ≥1 block per week; planned time ≤ free time − buffer; nothing after sleep time; fixed blocks and same-day deadlines never move in catch-up.
+**Acceptance tests** (`supabase/functions/_shared/scheduler/plan.test.ts`, run with `npm test`) encode the PRD acceptance criteria directly: every active someday task gets ≥1 block per week; planned time ≤ free time − buffer; nothing after sleep time; fixed blocks and same-day deadlines never move in catch-up.
 
 ---
 
