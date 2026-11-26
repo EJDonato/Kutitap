@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kutitap · Onboarding: your schedule</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0E1A2B}
+a{color:#FFD966}a:hover{color:#FFE9A8}
+</style>
+</head>
+<body>
+<div style="min-height: 900px; background: #0E1A2B; color: #F5F1E6; font-family: Inter, system-ui, sans-serif; font-size: 15px; line-height: 1.5; padding: 28px 40px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+<header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px">
+<div style="display: flex; align-items: center; gap: 10px"><img src="../assets/kutitap-icon.png" alt="" style="width: 36px; height: 36px; border-radius: 9px"><span style="font-family: Outfit, sans-serif; font-weight: 700; font-size: 21px">Kutitap</span></div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #AEB9CB">
+<span>Step 2 of 3</span>
+<div style="display: flex; gap: 6px"><span style="width: 32px; height: 6px; border-radius: 99px; background: #FFD966"></span><span style="width: 32px; height: 6px; border-radius: 99px; background: #FFD966"></span><span style="width: 32px; height: 6px; border-radius: 99px; background: #33496A"></span></div>
+</div>
+</header>
+
+<div style="display: flex; flex-wrap: wrap; gap: 32px; max-width: 1240px; width: 100%; margin: 0 auto; align-items: flex-start">
+<section style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; gap: 16px; align-items: center">
+<img src="../assets/titap-happy.png" alt="Titap" style="width: 84px; height: auto">
+<div>
+<h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 700; font-size: 32px; line-height: 1.2">What does a normal week look like?</h1>
+<p style="margin: 6px 0 0; color: #C9D2E0">Just type it. Work hours, classes, gym, anything fixed. I’ll plan around it.</p>
+</div>
+</div>
+<label for="sched" style="font-size: 14px; color: #AEB9CB">Your week, in your words</label>
+<textarea id="sched" rows="7" style="background: #162438; border: 1px solid #FFD966; border-radius: 14px; padding: 16px 18px; color: #F5F1E6; font: inherit; font-size: 16px; line-height: 1.6; resize: vertical">I do client work weekdays 9 to 12. Lunch at 12. Client calls Tue and Thu 3–4pm. Gym 4x a week, usually 6:30pm. I like a walk in the morning. Weekends are mostly free but keep Sunday light.</textarea>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 13px">
+<span style="color: #AEB9CB; padding: 6px 0">Try:</span>
+<button type="button" style="min-height: 36px; padding: 0 12px; border-radius: 99px; border: 1px solid #33496A; background: transparent; color: #C9D2E0; font: inherit">“I sleep at 11”</button>
+<button type="button" style="min-height: 36px; padding: 0 12px; border-radius: 99px; border: 1px solid #33496A; background: transparent; color: #C9D2E0; font: inherit">“Classes MWF 8–10”</button>
+<button type="button" style="min-height: 36px; padding: 0 12px; border-radius: 99px; border: 1px solid #33496A; background: transparent; color: #C9D2E0; font: inherit">“School pickup 3pm”</button>
+</div>
+<div style="display: flex; gap: 12px; margin-top: 8px">
+<a href="onb-someday.html" style="min-height: 48px; padding: 0 24px; border-radius: 12px; background: #FFD966; color: #1A1405; font-weight: 600; text-decoration: none; display: flex; align-items: center">Looks right, continue</a>
+<a href="onb-goals.html" style="min-height: 48px; padding: 0 20px; border-radius: 12px; border: 1px solid #33496A; color: #F5F1E6; text-decoration: none; display: flex; align-items: center">Back</a>
+</div>
+</section>
+
+<section style="flex: 1 1 420px; min-width: 0; background: #162438; border: 1px solid #24364F; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 600; font-size: 18px">Here’s what I understood</h2><span style="font-size: 12px; color: #B8E986">● updating as you type</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<div style="display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; background: #1A2A40; border-radius: 10px"><span style="color: #AEB9CB">Mon–Fri</span><span>Client work</span><span style="color: #AEB9CB">9:00–12:00</span></div>
+<div style="display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; background: #1A2A40; border-radius: 10px"><span style="color: #AEB9CB">Every day</span><span>Lunch</span><span style="color: #AEB9CB">12:00–1:00</span></div>
+<div style="display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; background: #1A2A40; border-radius: 10px"><span style="color: #AEB9CB">Tue, Thu</span><span>Client calls</span><span style="color: #AEB9CB">3:00–4:00</span></div>
+<div style="display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; background: #1A2A40; border-radius: 10px"><span style="color: #AEB9CB">4× a week</span><span>Gym <span style="font-size: 12px; color: #AEB9CB">· habit</span></span><span style="color: #AEB9CB">6:30 PM</span></div>
+<div style="display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; background: #1A2A40; border-radius: 10px"><span style="color: #AEB9CB">Mornings</span><span>Walk <span style="font-size: 12px; color: #AEB9CB">· habit</span></span><span style="color: #AEB9CB">7:00 AM</span></div>
+<div style="display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; background: #1A2A40; border-radius: 10px"><span style="color: #AEB9CB">Sunday</span><span>Keep light</span><span style="color: #AEB9CB">max 1 task</span></div>
+</div>
+<div style="background: #F5F1E6; color: #14213A; border-radius: 12px; padding: 12px 14px; font-size: 14px">
+<strong>One question:</strong> what time do you usually stop working for the day?
+<div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap">
+<button type="button" style="min-height: 38px; padding: 0 14px; border-radius: 8px; border: 1px solid #9AA6B8; background: transparent; color: #14213A; font: inherit">5 PM</button>
+<button type="button" style="min-height: 38px; padding: 0 14px; border-radius: 8px; border: 0; background: #14213A; color: #F5F1E6; font: inherit">6 PM</button>
+<button type="button" style="min-height: 38px; padding: 0 14px; border-radius: 8px; border: 1px solid #9AA6B8; background: transparent; color: #14213A; font: inherit">It varies</button>
+</div>
+</div>
+<p style="margin: 0; font-size: 13px; color: #AEB9CB">Free time found: about 22 hours a week for your goals and tasks.</p>
+</section>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+[
+  {
+    "file": "screens/desktop-today.html",
+    "title": "Desktop \u00b7 Today",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/desktop-week.html",
+    "title": "Desktop \u00b7 Week",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/desktop-goals.html",
+    "title": "Desktop \u00b7 Goals",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/desktop-onboarding.html",
+    "title": "Onboarding 3 \u00b7 Desktop \u00b7 Your schedule",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/desktop-summary.html",
+    "title": "Desktop \u00b7 Daily summary",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/focus-bar.html",
+    "title": "Floating focus bar + check-in",
+    "width": 440,
+    "height": 600
+  },
+  {
+    "file": "screens/mobile-today.html",
+    "title": "Mobile \u00b7 Today",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "screens/mobile-chat.html",
+    "title": "Mobile \u00b7 Add with chat",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "screens/mobile-summary.html",
+    "title": "Mobile \u00b7 Daily summary",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "screens/onb-welcome.html",
+    "title": "Onboarding 1 \u00b7 Desktop \u00b7 Welcome",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/onb-goals.html",
+    "title": "Onboarding 2 \u00b7 Desktop \u00b7 Goals",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/onb-someday.html",
+    "title": "Onboarding 4 \u00b7 Desktop \u00b7 Someday tasks",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/onb-ready.html",
+    "title": "Onboarding 5 \u00b7 Desktop \u00b7 Your week is ready",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "screens/m-onb-welcome.html",
+    "title": "Onboarding 1 \u00b7 Mobile \u00b7 Welcome",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "screens/m-onb-goals.html",
+    "title": "Onboarding 2 \u00b7 Mobile \u00b7 Goals",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "screens/m-onb-schedule.html",
+    "title": "Onboarding 3 \u00b7 Mobile \u00b7 Schedule",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "screens/m-onb-someday.html",
+    "title": "Onboarding 4 \u00b7 Mobile \u00b7 Someday tasks",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "screens/m-onb-ready.html",
+    "title": "Onboarding 5 \u00b7 Mobile \u00b7 Ready",
+    "width": 390,
+    "height": 844
+  }
+]
