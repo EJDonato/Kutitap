@@ -25,8 +25,11 @@ let slots = initialSlots();
 let selected: string | undefined = 'resume';
 let note = '';
 
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const list = document.getElementById('demo-list');
 const checkin = document.getElementById('demo-checkin');
+const bubble = document.getElementById('demo-bubble');
+const card = document.getElementById('demo-phone');
 
 const clock = (m: number) => {
   const h = Math.floor(m / 60) % 24;
@@ -92,7 +95,6 @@ function render() {
     .join('');
 
   const item = items.find((i) => i.id === selected);
-  const noteHtml = note ? `<p class="d-note">${esc(note)}</p>` : '';
   let body: string;
   if (!item) {
     body = '<span class="d-q">That\'s everything for today. Titap is glowing.</span>';
@@ -107,14 +109,25 @@ function render() {
         <button type="button" class="d-btn" data-act="skip">Skip</button>
       </span>`;
   }
-  checkin.innerHTML = `<span aria-live="polite">${noteHtml}</span>${body}
-    <span class="d-foot"><span>Tap any block to try it</span><button type="button" class="d-link" data-act="reset">Reset</button></span>`;
+  checkin.innerHTML = body;
+  const idle = !item ? 'That’s everything for today. I’m glowing!'
+    : item.fixed ? `“${item.title}” stays put. I plan around it.`
+    : `Up next: “${item.title}”. You got this.`;
+  if (bubble) bubble.innerHTML = `<b>Titap</b>${esc(note || idle)}`;
 }
 
 function update(fn: () => void) {
   const vt = (document as Document & { startViewTransition?: (cb: () => void) => void }).startViewTransition;
-  if (vt && !matchMedia('(prefers-reduced-motion: reduce)').matches) vt.call(document, fn);
+  if (vt && !reducedMotion) vt.call(document, fn);
   else fn();
+}
+
+function reset() {
+  items = initial();
+  slots = initialSlots();
+  selected = 'resume';
+  note = '';
+  render();
 }
 
 list?.addEventListener('click', (e) => {
@@ -127,17 +140,70 @@ list?.addEventListener('click', (e) => {
 
 checkin?.addEventListener('click', (e) => {
   const a = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-act]')?.dataset.act;
-  if (a === 'reset') {
-    update(() => {
-      items = initial();
-      slots = initialSlots();
-      selected = 'resume';
-      note = '';
-      render();
-    });
-  } else if (a) {
-    update(() => act(a as 'done' | 'more' | 'partly' | 'skip'));
-  }
+  if (a) update(() => act(a as 'done' | 'more' | 'partly' | 'skip'));
 });
 
+const date = document.querySelector('.app-date');
+if (date) date.textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 render();
+
+// ── Autoplay: a fake cursor clicks through a loop; stops for good once the visitor interacts. ──
+let stopped = reducedMotion || !card;
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+const cursor = document.createElement('span');
+cursor.className = 'd-cursor';
+cursor.setAttribute('aria-hidden', 'true');
+cursor.innerHTML =
+  '<svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 2l15 11-6.5 1.2L16 21l-3 1.4-3.4-6.9L4 20z" fill="#fff" stroke="#14213A" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+
+const stopAutoplay = (e: Event) => {
+  if (!e.isTrusted || stopped) return;
+  stopped = true;
+  cursor.remove();
+};
+card?.addEventListener('pointerdown', stopAutoplay);
+card?.addEventListener('keydown', stopAutoplay);
+
+async function clickOn(selector: string) {
+  const el = card!.querySelector<HTMLElement>(selector);
+  if (!el || stopped) return;
+  // Scroll the phone's list (never the page) so the target is visible.
+  if (list && list.contains(el)) {
+    list.scrollTo({ top: el.offsetTop - list.offsetTop - 8, behavior: 'smooth' });
+    await sleep(350);
+  }
+  const c = card!.getBoundingClientRect();
+  const r = el.getBoundingClientRect();
+  cursor.style.transform = `translate(${r.left - c.left + r.width * 0.55}px, ${r.top - c.top + r.height * 0.5}px)`;
+  await sleep(900);
+  if (stopped) return;
+  cursor.classList.add('d-press');
+  await sleep(180);
+  cursor.classList.remove('d-press');
+  if (!stopped) el.click();
+}
+
+async function autoplay() {
+  card!.append(cursor);
+  const c = card!.getBoundingClientRect();
+  cursor.style.transform = `translate(${c.width - 60}px, ${c.height - 40}px)`;
+  await sleep(1500);
+  while (!stopped) {
+    cursor.style.opacity = '1';
+    await clickOn('[data-act=skip]'); // Update résumé -> moved to tonight
+    await sleep(2600);
+    await clickOn('[data-act=done]'); // Apply to 3 jobs -> goal progress
+    await sleep(2600);
+    await clickOn('.d-row[data-id=gym]');
+    await sleep(500);
+    await clickOn('[data-act=partly]'); // Gym -> follow-up later
+    await sleep(3200);
+    if (stopped) break;
+    cursor.style.opacity = '0';
+    await sleep(400);
+    update(reset);
+    list?.scrollTo({ top: 0 });
+    await sleep(1800);
+  }
+}
+if (!stopped) autoplay();

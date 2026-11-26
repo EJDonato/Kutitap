@@ -13,33 +13,62 @@ body{margin:0;background:#0E1A2B}
 a{color:#FFD966}a:hover{color:#FFE9A8}
 </style>
 <style>:root{--accent:#FFD966} *{box-sizing:border-box} html{scroll-behavior:smooth}
-/* Titap's PNG has a soft dark backdrop, so keep it over dark areas only (never the cream check-in box) */
-.titap{position:absolute;right:24px;bottom:-108px;width:110px;height:auto}
-@media (min-width:1240px){.titap{right:-96px;bottom:-40px;width:120px}}
-@media (max-width:600px){.titap{right:8px;bottom:auto;top:-92px;width:96px}}
-/* Interactive Today demo (src/landing-demo.ts) */
-.d-row{display:flex;gap:14px;padding:14px;border-radius:14px;background:#1A2A40;border:1px solid transparent;color:#F5F1E6;font:inherit;text-align:left;width:100%;cursor:pointer;transition:background .15s,border-color .15s}
+/* Phone mockup + interactive Today demo (src/landing-demo.ts) */
+.phone{position:relative;width:340px;max-width:100%;height:660px;padding:11px;border-radius:56px;background:#05080F;box-shadow:0 0 0 2px #2A3A55,0 40px 90px rgba(0,0,0,.55),0 0 140px rgba(255,217,102,.07)}
+.phone::before,.phone::after{content:"";position:absolute;width:4px;border-radius:4px;background:#2A3A55}
+.phone::before{left:-4px;top:150px;height:64px;box-shadow:0 84px 0 #2A3A55}
+.phone::after{right:-4px;top:190px;height:96px}
+.screen{position:relative;height:100%;border-radius:45px;overflow:hidden;background:#0E1A2B;display:flex;flex-direction:column}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:104px;height:30px;border-radius:20px;background:#000;z-index:3}
+.status{flex-shrink:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:4px 30px 0;font-size:14px;font-weight:600}
+.status-icons{display:flex;align-items:flex-end;gap:2px}
+.status-icons i{width:3px;background:#F5F1E6;border-radius:1px}
+.status-icons i:nth-child(1){height:5px}.status-icons i:nth-child(2){height:8px}.status-icons i:nth-child(3){height:11px}
+.status-icons b{width:22px;height:11px;margin-left:6px;border:1.5px solid #F5F1E6;border-radius:3px;background:linear-gradient(90deg,#F5F1E6 70%,transparent 70%) content-box;padding:1px}
+.app{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px;padding:4px 16px 10px}
+.app-date{margin:0;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#AEB9CB}
+.app-title{margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:24px;line-height:1.15}
+.titap-row{display:flex;align-items:flex-end;gap:6px}
+.titap-row img{width:62px;height:auto;flex-shrink:0;margin-left:-6px}
+.bubble{margin:0 0 6px;flex:1;background:#F5F1E6;color:#14213A;border-radius:14px 14px 14px 4px;padding:8px 11px;font-size:12.5px;line-height:1.4;min-height:66px}
+.bubble b{display:block;font-size:11px;color:#8A6400}
+.app-sub{display:flex;justify-content:space-between;align-items:baseline;font-family:Outfit,sans-serif;font-weight:600;font-size:16px}
+.app-sub span:last-child{font-family:Inter,sans-serif;font-weight:400;font-size:11px;color:#AEB9CB}
+.d-list{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:8px}
+.d-list::-webkit-scrollbar{display:none}
+.d-row{flex-shrink:0;display:flex;gap:10px;padding:10px 12px;border-radius:12px;background:#1A2A40;border:1px solid transparent;color:#F5F1E6;font:inherit;font-size:14px;line-height:1.35;text-align:left;width:100%;cursor:pointer;transition:background .15s,border-color .15s}
 .d-row:hover{background:#1E3049}
 .d-row[aria-pressed=true]{background:#1E3049;border-color:var(--accent)}
 .d-row:disabled{cursor:default;opacity:.55}
-.d-row:focus-visible,.d-btn:focus-visible,.d-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.d-time{font-size:14px;color:#AEB9CB;width:52px;flex-shrink:0;display:flex;flex-direction:column}
-.d-day{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
-.d-body{display:flex;flex-direction:column;gap:4px}
+.d-row:focus-visible,.d-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.d-time{font-size:12px;color:#AEB9CB;width:38px;flex-shrink:0;display:flex;flex-direction:column;padding-top:1px}
+.d-day{font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+.d-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+.d-title{font-weight:500}
 .d-done{text-decoration:line-through}
-.d-tag{font-size:13px;color:#1A1405;background:#B8E986;border-radius:999px;padding:2px 10px;align-self:flex-start;font-weight:600}
-.d-meta{font-size:13px;color:#AEB9CB}
-.d-badge{font-size:12px;color:#1A1405;background:var(--accent);border-radius:999px;padding:1px 8px;font-weight:600;align-self:flex-start}
+.d-tag{font-size:11px;color:#1A1405;background:#B8E986;border-radius:999px;padding:1px 8px;align-self:flex-start;font-weight:600}
+.d-meta{font-size:11px;color:#AEB9CB}
+.d-badge{font-size:10px;color:#1A1405;background:var(--accent);border-radius:999px;padding:1px 7px;font-weight:700;align-self:flex-start}
 .d-badge-muted{background:#33496A;color:#F5F1E6}
-.d-q{font-weight:600}
-.d-note{margin:0;font-size:14px;line-height:1.45;background:#FFF1C2;border-radius:10px;padding:8px 12px}
-.d-btns{display:flex;flex-wrap:wrap;gap:8px}
-.d-btn{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid #9AA6B8;background:transparent;color:#14213A;font:inherit;font-size:15px;cursor:pointer}
+.d-check{flex-shrink:0;padding:12px;border-radius:14px;background:#F5F1E6;color:#14213A;display:flex;flex-direction:column;gap:8px}
+.d-q{font-weight:600;font-size:14px;line-height:1.35}
+.d-btns{display:flex;gap:6px}
+.d-btn{flex:1 1 auto;min-height:44px;padding:0 8px;border-radius:10px;border:1px solid #9AA6B8;background:transparent;color:#14213A;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
 .d-btn:hover{background:#E8E2D2}
 .d-btn-primary{border:0;background:#14213A;color:#F5F1E6;font-weight:600}
 .d-btn-primary:hover{background:#22314F}
-.d-foot{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#5B6880}
-.d-link{min-height:44px;padding:0 4px;border:0;background:none;color:#14213A;font:inherit;text-decoration:underline;cursor:pointer}
+.tabs{flex-shrink:0;display:flex;justify-content:space-around;align-items:center;height:60px;padding:0 10px;border-top:1px solid #1E3049;background:#0B1625}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#AEB9CB}
+.tab.on{color:var(--accent)}
+.tab svg,.tab-chat svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab-chat{width:42px;height:42px;border-radius:50%;background:var(--accent);color:#1A1405;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(255,217,102,.35)}
+.home-bar{flex-shrink:0;height:22px;background:#0B1625;display:flex;justify-content:center}
+.home-bar::before{content:"";width:120px;height:4px;margin-top:6px;border-radius:4px;background:rgba(245,241,230,.45)}
+.d-cursor{position:absolute;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:transform .9s cubic-bezier(.45,0,.2,1),opacity .4s;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.d-cursor svg{display:block;transition:transform .15s}
+.d-cursor.d-press svg{transform:scale(.8)}
+.d-cursor.d-press::after{content:"";position:absolute;left:-10px;top:-10px;width:24px;height:24px;border-radius:50%;border:2px solid var(--accent);animation:d-ripple .45s ease-out forwards}
+@keyframes d-ripple{from{transform:scale(.4);opacity:1}to{transform:scale(1.6);opacity:0}}
 </style>
 </head>
 <body>
@@ -61,9 +90,8 @@ a{color:#FFD966}a:hover{color:#FFE9A8}
 </header>
 
 <!-- HERO -->
-<section id="top" style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 96px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px">
-<!-- top-aligned (with a small offset) so the headline doesn't jump when the demo card grows -->
-<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px; padding-top: 32px">
+<section id="top" style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 96px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
 <p style="margin: 0; font-family: Outfit, sans-serif; font-weight: 600; font-size: 18px; color: var(--accent)">Hindi na ningas cogon.</p>
 <h1 style="margin: 0; font-family: Outfit, sans-serif; font-weight: 700; font-size: clamp(40px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.02em">Your someday tasks, finally done.</h1>
 <p style="margin: 0; font-size: 19px; color: #C9D2E0; max-width: 540px">Kutitap plans your day before you open your laptop, saves a spot for the tasks you keep putting off, and helps you catch up when the day goes sideways.</p>
@@ -78,38 +106,40 @@ a{color:#FFD966}a:hover{color:#FFE9A8}
 </div>
 
 <div style="flex: 1 1 420px; min-width: 0; display: flex; justify-content: center">
-<div style="position: relative; width: 100%; max-width: 460px; background: #162438; border: 1px solid #24364F; border-radius: 24px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
-<div style="display: flex; justify-content: space-between; align-items: baseline">
-<span style="font-family: Outfit, sans-serif; font-weight: 600; font-size: 20px">Today</span>
-<span style="font-size: 14px; color: #AEB9CB">Ready at 6:00 AM</span>
+<!-- Phone mockup. Static content is the no-JS fallback; src/landing-demo.ts re-renders the bubble, list and check-in. -->
+<div class="phone">
+<div class="screen" id="demo-phone">
+<div class="island" aria-hidden="true"></div>
+<div class="status" aria-hidden="true"><span>9:41</span><span class="status-icons"><i></i><i></i><i></i><b></b></span></div>
+<div class="app">
+<div>
+<p class="app-date">Thursday, November 26</p>
+<p class="app-title">Good morning!</p>
 </div>
-<!-- Static fallback; src/landing-demo.ts re-renders these two blocks to make the card interactive -->
-<div id="demo-list" style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: flex; gap: 14px; padding: 14px; border-radius: 14px; background: #1E3049; border: 1px solid var(--accent)">
-<span style="font-size: 14px; color: #AEB9CB; width: 52px; flex-shrink: 0">8:00</span>
-<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 600">Update résumé</span><span style="font-size: 13px; color: #1A1405; background: #B8E986; border-radius: 999px; padding: 2px 10px; align-self: flex-start; font-weight: 600">Someday task · waited 41 days</span></div>
+<div class="titap-row">
+<img src="/assets/titap-hero.png" alt="Titap, the Kutitap firefly mascot, glowing">
+<p class="bubble" id="demo-bubble" aria-live="polite"><b>Titap</b>Your day is planned. First up: “Update résumé”.</p>
 </div>
-<div style="display: flex; gap: 14px; padding: 14px; border-radius: 14px; background: #1A2A40">
-<span style="font-size: 14px; color: #AEB9CB; width: 52px; flex-shrink: 0">9:00</span><span>Work block</span>
+<div class="app-sub"><span>Today</span><span>Ready at 6:00 AM</span></div>
+<div id="demo-list" class="d-list">
+<div class="d-row" aria-pressed="true"><span class="d-time">8:00</span><span class="d-body"><span class="d-title">Update résumé</span><span class="d-tag">Someday task · waited 41 days</span></span></div>
+<div class="d-row"><span class="d-time">9:00</span><span class="d-body"><span class="d-title">Work block</span></span></div>
+<div class="d-row"><span class="d-time">1:00</span><span class="d-body"><span class="d-title">Apply to 3 jobs</span><span class="d-meta">Goal: Get a remote job</span></span></div>
+<div class="d-row"><span class="d-time">6:30</span><span class="d-body"><span class="d-title">Gym</span><span class="d-meta">Habit · 3 of 4 this week</span></span></div>
 </div>
-<div style="display: flex; gap: 14px; padding: 14px; border-radius: 14px; background: #1A2A40">
-<span style="font-size: 14px; color: #AEB9CB; width: 52px; flex-shrink: 0">1:00</span>
-<div style="display: flex; flex-direction: column; gap: 4px"><span>Apply to 3 jobs</span><span style="font-size: 13px; color: #AEB9CB">Goal: Get a remote job</span></div>
-</div>
-<div style="display: flex; gap: 14px; padding: 14px; border-radius: 14px; background: #1A2A40">
-<span style="font-size: 14px; color: #AEB9CB; width: 52px; flex-shrink: 0">6:30</span><span>Gym (3 of 4 this week)</span>
-</div>
-</div>
-<div id="demo-checkin" style="margin-top: 8px; padding: 16px; border-radius: 16px; background: #F5F1E6; color: #14213A; display: flex; flex-direction: column; gap: 12px">
-<span style="font-weight: 600">Did you finish “Update résumé”?</span>
-<div style="display: flex; flex-wrap: wrap; gap: 8px">
-<button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 0; background: #14213A; color: #F5F1E6; font-weight: 600; font-family: inherit">Done</button>
-<button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #9AA6B8; background: transparent; color: #14213A; font-family: inherit">+15 min</button>
-<button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #9AA6B8; background: transparent; color: #14213A; font-family: inherit">Partly</button>
+<div id="demo-checkin" class="d-check">
+<span class="d-q">Did you finish “Update résumé”?</span>
+<span class="d-btns"><button type="button" class="d-btn d-btn-primary">Done</button><button type="button" class="d-btn">+15 min</button><button type="button" class="d-btn">Partly</button><button type="button" class="d-btn">Skip</button></span>
 </div>
 </div>
-<!-- out of flow so it doesn't change the hero layout -->
-<img class="titap" src="/assets/titap-hero.png" alt="Titap, the Kutitap firefly mascot, smiling with its belly glowing">
+<nav class="tabs" aria-hidden="true">
+<span class="tab on"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>Today</span>
+<span class="tab"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Week</span>
+<span class="tab"><svg viewBox="0 0 24 24"><path d="M6 21V4M6 4h11l-2 4 2 4H6"/></svg>Goals</span>
+<span class="tab-chat"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+</nav>
+<div class="home-bar" aria-hidden="true"></div>
+</div>
 </div>
 </div>
 </section>

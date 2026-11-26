@@ -1,6 +1,6 @@
 # Kutitap (getkutitap.com)
 
-One site: the landing page at `/` (plain HTML plus a ~2 KB script that makes the hero's Today card interactive: tap a block, then Done / +15 min / Partly / Skip to see the catch-up) and the app at `/app/`. The landing page's **Log in** button goes to the app. The installable PWA is scoped to `/app/`, so it opens on the login screen, never on the landing page.
+One site: the landing page at `/` (plain HTML plus a ~2 KB script for the hero's phone mockup: a cursor autoplays Skip / Done / Partly and Titap's bubble explains the catch-up; visitors can take over by clicking) and the app at `/app/`. The landing page's **Log in** button goes to the app. The installable PWA is scoped to `/app/`, so it opens on the login screen, never on the landing page.
 
 ## Run it
 
