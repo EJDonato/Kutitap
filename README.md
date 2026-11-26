@@ -9,7 +9,7 @@ cd web && npm install && npm run dev   # http://localhost:5173 (landing), /app/ 
 npm test                               # scheduler tests, from the repo root
 ```
 
-The app is a demo: sign-in opens with the beta, so "Try the demo" goes straight to a Today screen planned by the real scheduler (`supabase/functions/_shared/scheduler`). Nothing is saved.
+The app is a clickable frontend with sample data (nothing is saved yet). "Try the demo" on the login runs onboarding (5 steps) into Today. Every screen from `kutitap-app-screens/` is built and responsive (desktop sidebar, mobile tab bar): Today, Week, Goals, Chat, Focus bar, Daily summary, Settings, Onboarding 1–5. Routes are hash-based (`/app/#/week`), and a demo-only **Screens** menu jumps to any of them.
 
 Deploy: Vercel project with root directory `web`, build `npm run build`, output `dist`.
 
@@ -19,7 +19,9 @@ Deploy: Vercel project with root directory `web`, build `npm run build`, output 
 web/
   index.html                     Landing page (single file, inline styles)
   app/index.html                 App entry (PWA): login, then Today
-  src/                           React app (Login, Today, Tailwind tokens) + landing-demo.ts
+  src/                           React app: main.tsx (routes), AppShell, ui.tsx (shared parts),
+                                 screens/, mock.ts (sample data), landing-demo.ts
+  public/assets/titap/           Titap mood images (base, happy, focused, calm, sleepy, sleeping, celebrate)
   public/manifest.webmanifest    PWA manifest (start_url and scope /app/)
   public/assets/
     kutitap-icon.png             Nav logo + favicon (128x128, transparent corners)
@@ -29,6 +31,7 @@ web/
   vercel.json                    /app -> /app/ redirect
 assets/*-original.jpg            Original AI-generated mascot art (source files, not deployed)
 supabase/                        Scheduler (shared with the app), migrations, tests
+kutitap-app-screens/             Design reference: static mockups of every app screen
 docs/
   PRD.md                         Product requirements (v3.3)
   VALIDATION.md                  Validation plan and checkpoints

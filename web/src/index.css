@@ -3,12 +3,15 @@
 /* Installed PWA: hide links back to the marketing site */
 @custom-variant standalone (@media (display-mode: standalone));
 
-/* Design tokens from README.md */
+/* Design tokens: kutitap-app-screens/README.md */
 @theme {
   --color-bg: #0E1A2B;
   --color-bg-alt: #0A1422;
   --color-surface: #162438;
   --color-surface-raised: #1A2A40;
+  --color-raised-2: #1E3049;
+  --color-block: #182A42;
+  --color-block-done: #142236;
   --color-border: #24364F;
   --color-border-strong: #33496A;
   --color-text: #F5F1E6;
@@ -17,9 +20,24 @@
   --color-accent: #FFD966;
   --color-on-accent: #1A1405;
   --color-someday: #B8E986;
+  --color-deadline: #FFB86B;
+  --color-now: #FF8A65;
+  --color-checkin: #F5F1E6;
+  --color-checkin-text: #14213A;
+  --color-checkin-muted: #4A5670;
+  --color-checkin-border: #9AA6B8;
   --color-titap: #6C74C0;
   --font-heading: "Outfit", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
 body { @apply bg-bg text-text font-sans antialiased; }
+
+/* Shared buttons and cards (44px touch targets) */
+@utility btn { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] px-5 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent; }
+@utility btn-primary { @apply btn bg-accent font-semibold text-on-accent hover:brightness-105; }
+@utility btn-ghost { @apply btn border border-border-strong text-text hover:bg-surface-raised; }
+@utility btn-dark { @apply btn bg-checkin-text font-semibold text-text hover:bg-[#22314F]; }
+@utility btn-light { @apply btn border border-checkin-border text-checkin-text hover:bg-[#E8E2D2]; }
+@utility card { @apply rounded-[18px] border border-border bg-surface; }
+@utility chip { @apply rounded-full border border-border-strong px-3.5 py-2 text-sm text-muted hover:bg-surface-raised; }
