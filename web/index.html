@@ -12,10 +12,14 @@
 body{margin:0;background:#0E1A2B}
 a{color:#FFD966}a:hover{color:#FFE9A8}
 </style>
-<style>:root{--accent:#FFD966} *{box-sizing:border-box} html{scroll-behavior:smooth}</style>
+<style>:root{--accent:#FFD966} *{box-sizing:border-box} html{scroll-behavior:smooth}
+/* Titap's PNG has a soft dark backdrop, so keep it over dark areas only (never the cream check-in box) */
+.titap{position:absolute;right:24px;bottom:-108px;width:110px;height:auto}
+@media (min-width:1240px){.titap{right:-96px;bottom:-40px;width:120px}}
+@media (max-width:600px){.titap{right:8px;bottom:auto;top:-92px;width:96px}}</style>
 </head>
 <body>
-<div style="background: #0E1A2B; color: #F5F1E6; font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.6; min-height: 100vh">
+<div style="background: #0E1A2B; color: #F5F1E6; font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.6; min-height: 100vh; overflow-x: clip">
 
 <!-- NAV -->
 <header style="max-width: 1160px; margin: 0 auto; padding: 24px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
@@ -49,10 +53,7 @@ a{color:#FFD966}a:hover{color:#FFE9A8}
 </div>
 
 <div style="flex: 1 1 420px; min-width: 0; display: flex; justify-content: center">
-<div style="width: 100%; max-width: 460px; display: flex; flex-direction: column">
-<!-- Titap perches on the card's top edge, in flow, so it never covers the nav or card content -->
-<img src="/assets/titap-hero.png" alt="Titap, the Kutitap firefly mascot, smiling with its belly glowing" style="align-self: flex-end; width: 140px; height: auto; margin: 0 24px -14px 0; position: relative; z-index: 1">
-<div style="position: relative; width: 100%; background: #162438; border: 1px solid #24364F; border-radius: 24px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+<div style="position: relative; width: 100%; max-width: 460px; background: #162438; border: 1px solid #24364F; border-radius: 24px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; justify-content: space-between; align-items: baseline">
 <span style="font-family: Outfit, sans-serif; font-weight: 600; font-size: 20px">Today</span>
 <span style="font-size: 14px; color: #AEB9CB">Ready at 6:00 AM</span>
@@ -79,7 +80,8 @@ a{color:#FFD966}a:hover{color:#FFE9A8}
 <button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #9AA6B8; background: transparent; color: #14213A; font-family: inherit">Partly</button>
 </div>
 </div>
-</div>
+<!-- out of flow so it doesn't change the hero layout -->
+<img class="titap" src="/assets/titap-hero.png" alt="Titap, the Kutitap firefly mascot, smiling with its belly glowing">
 </div>
 </div>
 </section>
