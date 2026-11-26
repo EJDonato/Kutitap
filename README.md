@@ -1,6 +1,6 @@
 # Kutitap (getkutitap.com)
 
-One site: the landing page at `/` (plain HTML, no JavaScript) and the app at `/app/`. The landing page's **Log in** button goes to the app. The installable PWA is scoped to `/app/`, so it opens on the login screen, never on the landing page.
+One site: the landing page at `/` (plain HTML plus a ~2 KB script that makes the hero's Today card interactive: tap a block, then Done / +15 min / Partly / Skip to see the catch-up) and the app at `/app/`. The landing page's **Log in** button goes to the app. The installable PWA is scoped to `/app/`, so it opens on the login screen, never on the landing page.
 
 ## Run it
 
@@ -19,7 +19,7 @@ Deploy: Vercel project with root directory `web`, build `npm run build`, output 
 web/
   index.html                     Landing page (single file, inline styles)
   app/index.html                 App entry (PWA): login, then Today
-  src/                           React app (Login, Today, Tailwind tokens)
+  src/                           React app (Login, Today, Tailwind tokens) + landing-demo.ts
   public/manifest.webmanifest    PWA manifest (start_url and scope /app/)
   public/assets/
     kutitap-icon.png             Nav logo + favicon (128x128, transparent corners)

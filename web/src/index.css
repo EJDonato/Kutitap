@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Installed PWA: hide links back to the marketing site */
+@custom-variant standalone (@media (display-mode: standalone));
+
 /* Design tokens from README.md */
 @theme {
   --color-bg: #0E1A2B;
