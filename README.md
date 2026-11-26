@@ -1,28 +1,38 @@
-# Kutitap: landing page (getkutitap.com)
+# Kutitap (getkutitap.com)
 
-Static export of the Kutitap waitlist landing page, designed in Claude Design. Plain HTML + inline CSS, no build step, no JavaScript. Open `index.html` in a browser to view it.
+One site: the landing page at `/` (plain HTML, no JavaScript) and the app at `/app/`. The landing page's **Log in** button goes to the app. The installable PWA is scoped to `/app/`, so it opens on the login screen, never on the landing page.
 
-## Run the app (demo)
+## Run it
 
 ```
-cd app && npm install && npm run dev   # http://localhost:5173
+cd web && npm install && npm run dev   # http://localhost:5173 (landing), /app/ (app)
 npm test                               # scheduler tests, from the repo root
 ```
 
-The Today screen plans a sample day with the real scheduler (`supabase/functions/_shared/scheduler`). No backend yet: nothing is saved.
+The app is a demo: sign-in opens with the beta, so "Try the demo" goes straight to a Today screen planned by the real scheduler (`supabase/functions/_shared/scheduler`). Nothing is saved.
+
+Deploy: Vercel project with root directory `web`, build `npm run build`, output `dist`.
 
 ## Files
 
 ```
-index.html                       The landing page (single file, inline styles)
-assets/
-  kutitap-icon.png               Nav logo + favicon (128x128, transparent corners)
-  titap-hero.png                 Titap mascot in the hero (soft-faded edges for dark bg)
-  titap-glow-levels.png          "Meet Titap" section: 4 glow levels
-  *-original.jpg                 Original AI-generated mascot art (source files)
+web/
+  index.html                     Landing page (single file, inline styles)
+  app/index.html                 App entry (PWA): login, then Today
+  src/                           React app (Login, Today, Tailwind tokens)
+  public/manifest.webmanifest    PWA manifest (start_url and scope /app/)
+  public/assets/
+    kutitap-icon.png             Nav logo + favicon (128x128, transparent corners)
+    icon-192.png, icon-512.png   PWA install icons (from the original icon art)
+    titap-hero.png               Titap mascot in the hero (soft-faded edges for dark bg)
+    titap-glow-levels.png        "Meet Titap" section: 4 glow levels
+  vercel.json                    /app -> /app/ redirect
+assets/*-original.jpg            Original AI-generated mascot art (source files, not deployed)
+supabase/                        Scheduler (shared with the app), migrations, tests
 docs/
   PRD.md                         Product requirements (v3.3)
   VALIDATION.md                  Validation plan and checkpoints
+  SYSTEM_DESIGN.md               Architecture and stack
 ```
 
 ## Design tokens
@@ -59,7 +69,7 @@ docs/
 
 ## To do before going live
 
-- [ ] **Hook up the waitlist form** (`<form id="waitlist">`). It currently submits nowhere. Options: Supabase table insert, a form service, or the email tool you'll use for the beta. Add success and error states.
+- [ ] **Hook up the waitlist form** (`<form id="waitlist">` in `web/index.html`). It currently submits nowhere. Options: Supabase table insert, a form service, or the email tool you'll use for the beta. Add success and error states.
 - [ ] **Privacy page:** footer link points to `#privacy` (placeholder).
 - [ ] **Mascot assets:** replace the soft-faded JPG-based PNGs with transparent PNG/SVG once the vector redraw is done. The app icon is a temporary version (see PRD Brand checklist).
 - [ ] **Founding Member price:** $29 is the test price from the PRD; confirm before launch.

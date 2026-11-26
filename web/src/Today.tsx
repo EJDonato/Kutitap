@@ -10,7 +10,7 @@ const fmt = (m: number) => {
 };
 const dur = (m: number) => (m >= 60 ? `${Math.floor(m / 60)}h${m % 60 ? ` ${m % 60}m` : ''}` : `${m} min`);
 
-export default function Today() {
+export default function Today({ onLogout }: { onLogout: () => void }) {
   const now = new Date();
   const minute = now.getHours() * 60 + now.getMinutes();
 
@@ -27,14 +27,17 @@ export default function Today() {
   return (
     <main className="mx-auto max-w-2xl px-6 py-10">
       <header className="mb-8 flex items-center gap-4">
-        <img src="/kutitap-icon.png" alt="" className="h-12 w-12 rounded-xl" />
-        <div>
+        <img src="/assets/kutitap-icon.png" alt="" className="h-12 w-12 rounded-xl" />
+        <div className="flex-1">
           <h1 className="font-heading text-3xl font-semibold">Today</h1>
           <p className="text-subtle">
             {now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })} · {done} of{' '}
             {taskBlocks.length} blocks done
           </p>
         </div>
+        <button onClick={onLogout} className="min-h-11 rounded-xl px-3 text-sm text-subtle hover:text-text">
+          Log out
+        </button>
       </header>
 
       <p className="mb-6 rounded-xl border border-border bg-surface px-4 py-3 text-sm text-subtle">

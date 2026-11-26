@@ -20,7 +20,7 @@
 
 | Layer | Choice | Why |
 |---|---|---|
-| Landing page | Existing static `index.html` | Already built. Waitlist form posts to Supabase (§9). |
+| Landing page | Existing static `web/index.html` at `/` | Already built, no JS. Waitlist form posts to Supabase (§9). **Log in** links to `/app/`. |
 | App frontend | **Vite + React + TypeScript + Tailwind** | Static SPA, drops straight into Tauri 2. Next.js adds SSR that Tauri can't use. |
 | Routing | React Router | 3 screens + settings + onboarding; nothing fancier needed. |
 | Server state | **TanStack Query** over `supabase-js` | Caching, refetch on window focus (cheap cross-device sync), optimistic updates for Done/Skip. |
@@ -40,7 +40,7 @@
 | Errors | Sentry (free tier) | Client + Edge Functions. |
 | Tests | `node --test` (scheduler, zero deps); Vitest for the app | Scheduler unit tests + AI parsing eval set (§11). Node 25 runs the `.ts` files directly. |
 
-**Domains:** `getkutitap.com` (landing), `app.getkutitap.com` (PWA). Separate origins keep the PWA's scope and service worker clean.
+**One origin:** `getkutitap.com/` is the landing page, `getkutitap.com/app/` is the app. One Vite project builds both pages; one Vercel deploy. The PWA manifest has `start_url` and `scope` `/app/`, so the installed app opens on login and never shows the landing page. (Changed from separate subdomains: one deploy, and the landing page can link straight into the app.)
 
 ---
 
@@ -96,8 +96,7 @@ flowchart LR
 ## 4. Repo layout
 
 ```
-landing/            index.html + assets (current files move here)
-app/                Vite React PWA
+web/                Vite project: index.html (landing) + app/index.html (PWA entry)
   src/screens/      Today, Week, Goals, Onboarding, Settings, Summary
   src/focus/        focus bar (PiP + fallback), timer, check-ins
   src/chat/         chat box + proposal preview
@@ -321,7 +320,7 @@ Placement is "earliest gap that fits within the preferred period"; too big for o
 
 ## 13. Phase 2 hooks (decided now, built later)
 
-- SPA is static → Tauri 2 wraps `app/dist` unchanged.
+- SPA is static → Tauri 2 wraps the `/app/` build unchanged.
 - Notifications, auto-start and the floating window sit behind one small `platform` module (`notify`, `openFocusWindow`, `onWake`) with a web implementation now and a Tauri one later. Nothing else in the app calls browser APIs for these directly.
 - Blocking/usage tracking will be on-device in Tauri; nothing in this design sends that data to the server.
 
