@@ -2,6 +2,15 @@
 
 Static export of the Kutitap waitlist landing page, designed in Claude Design. Plain HTML + inline CSS, no build step, no JavaScript. Open `index.html` in a browser to view it.
 
+## Run the app (demo)
+
+```
+cd app && npm install && npm run dev   # http://localhost:5173
+npm test                               # scheduler tests, from the repo root
+```
+
+The Today screen plans a sample day with the real scheduler (`supabase/functions/_shared/scheduler`). No backend yet: nothing is saved.
+
 ## Files
 
 ```

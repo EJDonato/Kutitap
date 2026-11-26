@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "paths": { "@scheduler/*": ["../supabase/functions/_shared/scheduler/*"] }
+  },
+  "include": ["src", "../supabase/functions/_shared/scheduler"],
+  "exclude": ["../supabase/functions/_shared/**/*.test.ts"]
+}
